@@ -50,4 +50,10 @@ digitoDecena x | x >=0 = div x 10
                |otherwise = div (-x) 10
 
 
---comparar :: Int -> Int -> Int
+sumaUltimosDosDigitos :: Int -> Int
+sumaUltimosDosDigitos x = digitoDecena(x) + digitoUnidades(y)
+
+comparar :: Int -> Int -> Int
+comparar x y | sumaUltimosDosDigitos(x) < sumaUltimosDosDigitos(y) = 1
+             | sumaUltimosDosDigitos(x) > sumaUltimosDosDigitos(y) = -1
+             | otherwise = 0
