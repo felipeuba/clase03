@@ -42,8 +42,12 @@ distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
 distanciaManhattan (a,b,c) (d,e,f) =  absoluto (a-d) + absoluto (b - e) + absoluto (c-f)
 
 digitoUnidades :: Int -> Int
-digitoUnidades x = mod x 10
+digitoUnidades x | x >=0 = mod x 10
+                 |otherwise = mod (-x) 10
 
+digitoDecena :: Int -> Int
+digitoDecena x | x >=0 = div x 10
+               |otherwise = div (-x) 10
 
 
 --comparar :: Int -> Int -> Int
