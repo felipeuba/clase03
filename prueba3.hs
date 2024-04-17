@@ -57,3 +57,62 @@ comparar :: Int -> Int -> Int
 comparar x y | sumaUltimosDosDigitos(x) < sumaUltimosDosDigitos(y) = 1
              | sumaUltimosDosDigitos(x) > sumaUltimosDosDigitos(y) = -1
              | otherwise = 0
+
+
+--1
+
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n-1) + fibonacci (n-2)
+
+--2
+
+parteEntera :: Float -> Integer
+parteEntera x | 0 <= x && x < 1 = 0
+              | otherwise = 1 + parteEntera (x-1)
+
+--3 
+
+esDivisible :: Int -> Int -> Bool
+esDivisible x y | x == y  = True
+                | x < y = False
+                | otherwise = esDivisible (x-y) y
+
+--4
+
+sumaImpares :: Integer ->Integer
+sumaImpares x | x == 1 = 1
+              | otherwise = (2 * x - 1) + sumaImpares (x-1)
+
+--5 
+
+medioFact :: Integer -> Integer
+medioFact x | x == 1 || x == 0 = 1
+            | x == 2 = 2
+            | otherwise = x * medioFact (x-2)
+
+--6
+
+sumaDigitos :: Int -> Int
+sumaDigitos x | x < 10 = x
+              | otherwise = mod x 10 + sumaDigitos (div x 10)
+
+--7
+
+todosDigitosIguales :: Integer ->Bool
+todosDigitosIguales x | x < 10 = True
+                      | otherwise = mod x 10 == mod (div x 10) 10 && todosDigitosIguales (div x 10)
+
+--8
+
+cantidadDeDigitos :: Integer -> Integer 
+cantidadDeDigitos x | x < 10 = x
+                    | otherwise = 1 + cantidadDeDigitos(div x 10)
+
+iesimoDigito :: Integer -> Integer -> Integer
+iesimoDigito x i | cantidadDeDigitos x == i = mod x 10
+                 | otherwise = iesimoDigito(div x 10) i
+
+--9
+
