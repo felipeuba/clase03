@@ -115,4 +115,10 @@ iesimoDigito x i | cantidadDeDigitos x == i = mod x 10
                  | otherwise = iesimoDigito(div x 10) i
 
 --9
+--9
+ --UltimoDigito div x 10^(cantidadDeDigitos-1) asi voy obteniendo los primeros digitos
+            -- despues los tengo que comparar con los ultimos
 
+esCapicua :: Integer -> Bool
+esCapicua x | cantidadDeDigitos x == 1 = True
+            | otherwise = mod (div x (10^(cantidadDeDigitos x - 1))) 10 == mod x 10
