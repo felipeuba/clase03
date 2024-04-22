@@ -204,3 +204,69 @@ contarDivisoresDeHasta y x | y == x = 1
 
 esPrimo :: Int ->Bool
 esPrimo x = contarDivisoresDeHasta 1 x <= 2
+
+
+--guia 5
+
+--1
+longitud :: [t] -> Integer
+longitud [] = 0
+longitud (x:xs) = 1 + longitud (xs)
+
+--b
+ultimo :: [t] -> t
+ultimo (x:[]) = x
+ultimo (_:xs) = ultimo (xs)
+
+--c
+principio :: [t] -> [t]
+principio [_] = []
+principio (x:xs) = x : principio xs
+
+-- elemento : lista
+-- lista ++ lista
+--d
+reverso :: [t] -> [t]
+reverso (x:[]) = [x]
+reverso (x:xs) =  reverso xs ++ [x]
+
+--2)
+pertenece :: (Eq t) => t -> [t] -> Bool
+pertenece e [] = False
+pertenece e (x:xs) = e == x || pertenece e xs
+
+--b
+todosIguales :: (Eq t) => [t] -> Bool
+todosIguales [_] = True
+todosIguales (x:xs) = x == head xs && todosIguales (xs)
+
+--c
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos [_] = True
+todosDistintos (x:xs) = not (pertenece x xs) && todosDistintos xs
+
+hayRepetidos :: (Eq t) => [t] -> Bool
+hayRepetidos [] = False
+--hayRepetidos e (x:[]) =
+hayRepetidos [_] = False
+hayRepetidos (x:xs) = pertenece x xs || hayRepetidos xs
+
+--c
+quitar :: (Eq t) => t -> [t] -> [t]
+quitar t [] = []
+quitar t (x:xs) | t == x = xs
+                | otherwise = [x] ++ quitar t xs
+
+--
+quitarTodos :: (Eq t ) => t -> [t] -> [t]
+quitarTodos t [] = []
+quitarTodos t (x:xs) | pertenece t (x:xs) = quitarTodos t(quitar t (x:xs))
+                     | otherwise = (x:xs)
+
+
+--3.3
+
+maximo :: [Integer] -> Integer 
+maximo (x:[]) = x
+maximo (x:xs) | x >= head xs = maximo ([x]++tail xs)
+              | otherwise = maximo xs
