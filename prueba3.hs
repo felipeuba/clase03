@@ -122,3 +122,85 @@ iesimoDigito x i | cantidadDeDigitos x == i = mod x 10
 esCapicua :: Integer -> Bool
 esCapicua x | cantidadDeDigitos x == 1 = True
             | otherwise = mod (div x (10^(cantidadDeDigitos x - 1))) 10 == mod x 10
+            
+--10 son sumatorias todas
+--a
+f1 :: Int -> Int
+f1 x | x==0 = 1
+     | otherwise = 2^x + f1(x-1)
+
+--b
+f2 :: Int -> Float -> Float
+f2 n q | n == 0 = 0
+       | otherwise = q ^ n + f2 (n-1) q
+
+--c
+f3 :: Int -> Float -> Float
+f3 n = f2 (2*n)
+
+--d
+
+f4 :: Int -> Float -> Float
+f4 n q = f3 n q - f2 (n-1) q
+
+--11
+
+
+eAprox :: Int -> Float
+eAprox n | n == 1 = 2
+         | otherwise = 1 / fromIntegral (factorial n) + eAprox(n-1) 
+
+--11 b
+
+e :: Float
+e = eAprox 9
+
+--12
+
+fg :: Integer -> Float
+fg 1 = 2
+fg n = 2 + 1 / fg (n-1)
+
+raizDe2Aprox :: Integer ->Float
+raizDe2Aprox x = fg (x-1)
+
+--13
+
+primerSum :: Int -> Int -> Int
+primerSum n m | m == 1 = n
+              | otherwise = n ^ m + primerSum n (m-1)
+              
+segundaSum :: Int -> Int -> Int
+segundaSum n m | n == 1 = primerSum 1 m
+               | otherwise = primerSum n m + segundaSum  (n-1) m
+
+--14
+
+sumaABPotencias :: Int -> Int -> Int -> Int
+sumaABPotencias q a b | a == 1 = q^(a+b)
+                      | otherwise = q ^ (a+b) + sumaABPotencias q (a-1) b
+
+
+sumaPotencias :: Int -> Int ->Int ->Int
+sumaPotencias q a b | b == 1 = sumaABPotencias q a b
+                    | otherwise = sumaABPotencias q a b + sumaPotencias q a (b-1)
+
+--15
+
+primerSumaRacionales :: Int -> Int -> Float
+primerSumaRacionales p q | q == 1 = fromIntegral p
+                         | otherwise = fromIntegral p / fromIntegral q + primerSumaRacionales p (q-1)
+
+sumaRacionales :: Int -> Int -> Float
+sumaRacionales p q | p == 1 =  primerSumaRacionales p q
+                   | otherwise = primerSumaRacionales p q + sumaRacionales (p-1) q
+
+
+--16
+contarDivisoresDeHasta :: Int -> Int -> Int
+contarDivisoresDeHasta y x | y == x = 1
+                           | mod x y == 0 = 1 + contarDivisoresDeHasta (y+1) x
+                           | otherwise = contarDivisoresDeHasta (y+1) x
+
+esPrimo :: Int ->Bool
+esPrimo x = contarDivisoresDeHasta 1 x <= 2
